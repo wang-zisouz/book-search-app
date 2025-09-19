@@ -1,0 +1,11 @@
+<div>
+  <input [(ngModel)]="keyword" placeholder="输入书名" />
+  <button (click)="search()">搜索</button>
+</div>
+
+<div *ngIf="books.length">
+  <div *ngFor="let book of books">
+    <h3>{{ book.volumeInfo.title }}</h3>
+    <p>{{ book.volumeInfo.authors?.join(', ') }}</p>
+  </div>
+</div>

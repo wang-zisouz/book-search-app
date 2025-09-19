@@ -1,0 +1,10 @@
+services:
+  front:
+      build:
+        context: ./
+      volumes:
+         - ./book-search-app:/xiaosi
+         - /xiaosi/node_modules
+      ports:
+        - 4200:4200
+      tty: true
