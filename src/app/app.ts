@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { BookSearchComponent } from './book-search.component';
 
 @Component({
@@ -8,6 +8,4 @@ import { BookSearchComponent } from './book-search.component';
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class App {
-  protected readonly title = signal('book-search-app');
-}
+export class App {}

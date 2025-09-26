@@ -1,62 +1,76 @@
-.app-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.app-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.search-section {
+/* 搜索框区域 */
+.search-box {
   display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.search-input {
-  flex: 1;
-  padding: 8px;
-  font-size: 16px;
+.search-box input {
+  background-color: #ebeff5;
+  width: 400px;
+  height: 50px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  outline: none; 
 }
 
-.search-button {
-  padding: 8px 16px;
-  font-size: 16px;
+.search-box button {
+  background-color: #75ade9;
+  color: #f6f2f2;
+  font-size: 18px;
+  font-weight: bold;
+  height: 50px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.books-section {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.search-box button:hover {
+  background-color: #5a8cd4;
+  transform: scale(1.03);   /* ’‘’‘放大3%, 动态 这个好玩‘’‘’ */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
+.search-box input::placeholder {
+  color: #b2afb1;
+  opacity: 1;
+}
+
+/* 书籍网格 */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+/* 单个书籍卡片 */
 .book-card {
-  display: flex;
-  gap: 15px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  text-align: center;
+  background: #f9f9f9;
 }
 
-.book-info {
-  flex: 1;
+/* 图片 */
+.book-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;   /* 保持图片比例裁剪 */
+  border-radius: 6px;
 }
 
-.book-title {
+/* 书名和作者 */
+.book-card h3 {
+  font-size: 18px;
+  margin: 12px 0 6px;
+}
+
+.book-card p {
+  font-size: 16px;
   margin: 0;
-}
-
-.book-authors,
-.book-description {
-  margin: 5px 0;
-}
-
-.book-image img {
-  width: 100px;
-  height: auto;
 }

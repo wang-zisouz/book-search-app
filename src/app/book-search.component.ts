@@ -1,28 +1,52 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CommonModule, NgIf, NgFor } from '@angular/common';
-import { HttpClient } from "@angular/common/http";
+import { BookService } from './book-search.service';
 
 @Component({
   selector: 'app-book-search',
   standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './book-search.component.html',
-  imports: [FormsModule, CommonModule]
+  styleUrls: ['./book-search.component.css'],
+  providers: [BookService]
 })
 export class BookSearchComponent {
-  keyword = '';
+  query: string = '';
   books: any[] = [];
+  loading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private bookService: BookService) {}
 
-  search() {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${this.keyword}`;
-    this.http.get(url).subscribe((res: any) => {
-      console.log(res);
-      this.books = res.items || [];
+  searchBooks() {
+    if (!this.query.trim()) return;
+
+    this.loading = true;
+    this.bookService.searchBooks(this.query).subscribe({
+      next: (res: any) => {
+        this.books = res.items || [];
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
     });
   }
+
+  openBook(book: any) {
+  const url = book.volumeInfo.infoLink;
+  if (url) {
+    window.open(url, "_blank");
+    // _blank	  新标签页打开
+    // _self	  当前页面打开
+    // _parent	在父框架打开（如果有 iframe）
+    // _top	    在最顶层窗口打开（跳出嵌套 iframe）
+  } else {
+    alert("没有可用的详情链接");
+  }
 }
+}
+
 
   // 输入框 (ngModel) ↔ keyword
   //        ↓ 点击按钮
