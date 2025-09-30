@@ -1,0 +1,8 @@
+<div class="history-container" *ngIf="history.length">
+  <h4>搜索历史</h4>
+  <ul>
+    <li *ngFor="let item of history" (click)="onClick(item)">
+      {{ item }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,34 @@
+.history-container {
+  margin-top: 20px;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.history-container h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.history-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.history-container li {
+  background: #75ade9;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.history-container li:hover {
+  background: #5a8cd4;
+  transform: scale(1.05);
+}

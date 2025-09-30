@@ -1,7 +1,9 @@
 // import { provideHttpClient } from "@angular/common/http";
 // import { NgModule } from "@angular/core";
 
-// @NgModule({
-//   providers:[provideHttpClient()]
+// 传统模式 @NgModule({
+//   declarations: [AppComponent, BookSearchComponent],
+//   imports: [BrowserModule, FormsModule],
+//   bootstrap: [AppComponent]
 // })
 // export class AppModule {}

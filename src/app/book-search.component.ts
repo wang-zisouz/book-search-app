@@ -2,27 +2,36 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookService } from './book-search.service';
+import { HistoryComponent } from './history.component';
 
 @Component({
   selector: 'app-book-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HistoryComponent],
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.css'],
   providers: [BookService]
 })
 export class BookSearchComponent {
-  query: string = '';
-  books: any[] = [];
-  loading = false;
+  query: string = '';        // 输入框的文本
+  books: any[] = [];         // 搜索结果
+  loading = false;           // 加载状态
+  searchHistory: string[] = []; // 搜索历史
 
   constructor(private bookService: BookService) {}
 
   searchBooks() {
-    if (!this.query.trim()) return;
+    const searchTerm = this.query.trim();  // 去掉首尾空格
+    if (!searchTerm) return;
+
+    // 保存历史记录，最多10条
+    if (!this.searchHistory.includes(searchTerm)) {
+      this.searchHistory.unshift(searchTerm);
+      if (this.searchHistory.length > 10) this.searchHistory.pop();
+    }
 
     this.loading = true;
-    this.bookService.searchBooks(this.query).subscribe({
+    this.bookService.searchBooks(searchTerm).subscribe({
       next: (res: any) => {
         this.books = res.items || [];
         this.loading = false;
@@ -33,18 +42,25 @@ export class BookSearchComponent {
     });
   }
 
+
   openBook(book: any) {
-  const url = book.volumeInfo.infoLink;
-  if (url) {
-    window.open(url, "_blank");
-    // _blank	  新标签页打开
-    // _self	  当前页面打开
-    // _parent	在父框架打开（如果有 iframe）
-    // _top	    在最顶层窗口打开（跳出嵌套 iframe）
-  } else {
-    alert("没有可用的详情链接");
+    const url = book.volumeInfo.infoLink;
+    if (url) {
+      window.open(url, "_blank");
+      // _blank	  新标签页打开
+      // _self	  当前页面打开
+      // _parent	在父框架打开（如果有 iframe）
+      // _top	    在最顶层窗口打开（跳出嵌套 iframe）
+    } else {
+      alert("没有可用的详情链接");
+    }
   }
-}
+
+  onSelectHistory(item: string) {
+    this.query = item;
+    this.searchBooks();
+  }
+
 }
 
 

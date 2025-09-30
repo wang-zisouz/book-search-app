@@ -3,12 +3,18 @@
   <button (click)="searchBooks()">Go</button>
 </div>
 
-<div *ngIf="loading">Loading...</div>
-
+<div *ngIf="loading">Wait a second...</div>
 <div class="book-grid">
   <div class="book-card" *ngFor="let book of books" (click)="openBook(book)">
+    <!-- for (let book of books) {} -->
     <img [src]="book.volumeInfo.imageLinks?.thumbnail" alt="Book cover" />
-    <h3>{{ book.volumeInfo.title }}</h3>
+    <!-- <img> 标签的 src 属性是 '图片地址' -->
+    <!-- [src] 让 Angular 读取 ts 中的变量，把这个 URL 放到 src -->
+
+    <!-- volumeInfo = 谷歌图书 API 返回的数据里，每本书的详情对象 -->
+    <!-- imageLinks?.thumbnail = 封面小图的 URL -->
+    <h3>{{ book.volumeInfo.title }}</h3> 
+    <!-- Angular 的插值用 {{ }} 显示 ts 里的变量值 -->
     <p *ngIf="book.volumeInfo.authors">by {{ book.volumeInfo.authors.join(', ') }}</p>
   </div>
 </div>
